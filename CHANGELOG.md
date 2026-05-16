@@ -29,10 +29,10 @@ Wave-3 hardening pass — 42 items across backend, Daml, frontend (separate
 - **Backend:** `SmartRouter.getBestQuote` sorts by `outputAmount − fee` (true net) rather than raw output; fee-heavy venues no longer win when a cheaper venue exists.
 - **Backend:** `circuit-breaker.ts` exposes `getState()` to the metrics registry; a 10s ticker in `index.ts` pushes current state to Prometheus. The breaker gauge is no longer stuck at 0.
 - **Backend:** `xreserve` router fixes the `requireParty` factory bug (was invoked without parentheses → every authenticated xReserve route hung until timeout on non-localnet).
-- **Backend:** `/var/log/roil-backend*` tightened to `0640 roil:roil` on live TestNet.
+- **Backend:** log file permissions tightened (group-readable only) on live TestNet.
 - **Backend:** `CC_FALLBACK_PRICE` no longer has a hardcoded `0.15` default — the engine throws on missing oracle + missing env var so operators must set a sane value.
 - **Ops:** `scripts/deploy-dar.sh` picks the highest-versioned DAR from `main/.daml/dist/` by default (was hardcoded to the legacy 0.2.0 path). `backend/.env.example` is now a complete MainNet operator template with all 9 admin-party vars, traffic config, and JWT key paths. `.github/workflows/ci.yml` bumped to Node 22 (Node 20 EOL 2026-04-30). Branch protection tightened with `strict: true`, required PR review (1 admin-bypassable), and `Docker Build Validation` in required checks.
-- **Ops:** systemd unit file now reflects the live TestNet layout (User=roil, /opt/roil-backend, full `ProtectSystem=strict` + ExecStartPre `-` prefix). TestNet migrated to this hardened layout on 2026-04-17.
+- **Ops:** systemd unit file hardened (unprivileged user, `ProtectSystem=strict`, `ExecStartPre` health probe). TestNet migrated to this layout on 2026-04-17.
 - **Docs:** `ROADMAP.md` rewritten for v0.3.3 reality (10 modules, 157 tests, Phase 3 = TestNet Live, Phase 4 = MainNet 04-20). `TREASURY.md` updated with v0.3.2+ `UpdateBalances` optimistic concurrency. `docs/devnet-application.md` archived to `docs-internal/` (historical). `docs/featured-app-application.md` version-drift corrected (v0.5.18, DAR v0.3.3, 157 tests).
 
 ### Fixed

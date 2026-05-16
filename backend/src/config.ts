@@ -25,14 +25,14 @@ const NETWORK_DEFAULTS: Record<NetworkEnv, {
     scanUrl: 'http://scan.localhost:4000',
   },
   devnet: {
-    jsonApiUrl: 'http://159.195.71.102:5003',                     // Roil DevNet validator
-    grpcApiUrl: 'http://159.195.71.102:5002',
+    jsonApiUrl: process.env.CANTON_DEVNET_JSON_API || '',
+    grpcApiUrl: process.env.CANTON_DEVNET_GRPC_API || '',
     cantexApiUrl: 'https://api.devnet.cantex.io',
     scanUrl: 'https://scan.sv-1.dev.global.canton.network.sync.global',
   },
   testnet: {
-    jsonApiUrl: 'http://159.195.78.106:5003',                     // Roil TestNet validator
-    grpcApiUrl: 'http://159.195.78.106:5002',
+    jsonApiUrl: process.env.CANTON_TESTNET_JSON_API || '',
+    grpcApiUrl: process.env.CANTON_TESTNET_GRPC_API || '',
     cantexApiUrl: 'https://api.testnet.cantex.io',
     scanUrl: 'https://scan.sv-1.test.global.canton.network.sync.global',
   },

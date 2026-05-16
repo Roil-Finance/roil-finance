@@ -64,7 +64,7 @@ groups:
           component: ledger
         annotations:
           summary: "Canton Ledger API p95 latency above 5s"
-          description: "Ledger API is slow. Check validator container health (docker compose ps at /root/splice-node/docker-compose/validator)."
+          description: "Ledger API is slow. Check validator container health (docker compose ps in the Splice validator compose directory)."
 
       - alert: CantexApiDegraded
         expr: |

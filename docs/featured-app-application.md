@@ -43,7 +43,7 @@ Canton's sub-transaction privacy lets Roil keep each user's portfolio confidenti
 | **Splice / Canton integration** | `splice-api-featured-app-v1`, `splice-api-token-holding-v1`, `splice-api-token-metadata-v1`, `splice-api-token-transfer-instruction-v1`, `splice-api-token-allocation-v1`, `splice-api-token-allocation-request-v1` — declared as data-dependencies, transfers use the Splice TransferInstruction factory pattern for atomic settlement. |
 | **Backend** | TypeScript / Express, Canton JSON Ledger API v2, Node 20, OpenTelemetry, Prometheus metrics, JWT auth (HS256 / RS256 / ES256), circuit breaker + retry with jitter, per-key idempotency locks. |
 | **Frontend** | React 19 + Vite + Tailwind, deployed on Vercel with custom domain `roil.app`. Persistent TestNet network badge + demo-mode banner for transparency. |
-| **Infrastructure** | 3 Netcup VPS (DevNet, TestNet, MainNet), systemd + logrotate, Caddy reverse proxy with Let's Encrypt TLS. |
+| **Infrastructure** | One validator node per Canton network (DevNet, TestNet, MainNet) under systemd with logrotate; reverse-proxy TLS with Let's Encrypt. |
 
 ## 5. CIP Compliance Matrix
 
@@ -96,9 +96,9 @@ Conservative estimate, assuming 100 active whitelisted users by month 6:
 
 ## 9. Current Deployment Status
 
-- **DevNet (`159.195.71.102`):** Splice v0.5.18 validator — 6 containers healthy for 7+ days. Roil DAR v0.3.3 built and test suite 157/157 passing.
-- **TestNet (`159.195.78.106`):** Splice v0.5.18 validator + Roil backend (systemd, live at `https://api.roil.app`). DAR v0.3.3 uploaded. Frontend at `https://roil.app`.
-- **MainNet (`159.195.76.220`):** VPS provisioned; awaiting Pedro's onboarding secret on 2026-04-20.
+- **DevNet:** Splice v0.5.18 validator — 6 containers healthy for 7+ days. Roil DAR v0.3.3 built and test suite 157/157 passing.
+- **TestNet:** Splice v0.5.18 validator + Roil backend (systemd, live at `https://api.roil.app`). DAR v0.3.3 uploaded. Frontend at `https://roil.app`.
+- **MainNet:** VPS provisioned; awaiting Pedro's onboarding secret on 2026-04-20.
 
 ## 10. Roadmap (post-FA approval)
 

@@ -111,23 +111,21 @@ The JWT payload contains the user's Canton party ID and ledger permissions (`act
 
 ## Deployment Topology
 
-Roil runs on three separate Netcup VPS nodes corresponding to the three Canton networks:
+Roil operates one validator node per Canton network (DevNet, TestNet, MainNet). Each node runs the upstream Splice validator stack; TestNet and MainNet additionally host the Roil backend behind a TLS reverse proxy. Specific host details are kept out of this document.
 
-### DevNet (`roil-devnet`)
-- Splice Node v0.5.17 (`docker compose` at `/root/splice-node/docker-compose/validator/`)
-- Used for Daml DAR builds and pre-deployment smoke testing
-- No Roil backend process
+### DevNet
+- Splice validator (docker compose). Used for Daml DAR builds and pre-deployment smoke testing. No Roil backend process.
 
-### TestNet (`roil-testnet`) — live
-- Splice Node v0.5.17 (`docker compose`) + Roil backend (systemd)
-- **Backend:** `roil-backend.service` (`User=roil`, hardened: `NoNewPrivileges`, `ProtectSystem=strict`, `PrivateTmp`) running compiled `dist/index.js` on `localhost:3001`
-- **DAR:** `roil-finance-0.3.1.dar` uploaded to the validator participant
-- **Edge:** Caddy 2.6.2 terminates TLS for `api.roil.app` (Let's Encrypt auto-renew) and reverse-proxies to `localhost:3001`. To keep port 80 free for Caddy, the Splice-provided nginx is bound to `127.0.0.1:80` via `HOST_BIND_IP`. Splice wallet/ANS UIs reachable via SSH tunnel only.
-- **Frontend:** `roil.app` served by Vercel from the `Roil-Finance/roil-app` repo (not this one); it calls `https://api.roil.app`.
+### TestNet — live
+- Splice validator + Roil backend (managed by systemd, runs as an unprivileged user with strict filesystem and capability restrictions).
+- Latest DAR uploaded to the validator participant.
+- TLS termination via reverse proxy at `api.roil.app` (Let's Encrypt auto-renew).
+- Splice wallet/ANS UIs are not publicly exposed.
+- Frontend `roil.app` served by Vercel from the [`Roil-Finance/roil-app`](https://github.com/Roil-Finance/roil-app) repo (not this one); it calls `https://api.roil.app`.
 
-### MainNet (`roil-mainnet`) — awaiting 2026-04-20 provisioning
-- Bare Ubuntu 24.04, no Splice installed
-- Onboarding secret handover scheduled for Canton MainNet launch day
+### MainNet
+- Splice validator live since 2026-04-20 (Canton Foundation as SV sponsor).
+- App deployment is in pre-launch state pending external audit completion.
 
 ### Observability
 - Prometheus scrapes the backend `/metrics` endpoint (see `monitoring/prometheus.yml` for Docker-Compose and systemd contexts; alert rules in `monitoring/alerts.yml`).
