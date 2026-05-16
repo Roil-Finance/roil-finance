@@ -340,6 +340,17 @@ export class DCAEngine {
       });
     }
 
+    // Summary log per tick so ops can see throughput at a glance instead of
+    // having to scan individual per-schedule lines. Skipped when nothing ran
+    // to avoid log noise on the no-active-schedules path.
+    if (executed > 0 || failed > 0) {
+      logger.info('[dca] Tick complete', {
+        component: 'dca',
+        executed,
+        failed,
+      });
+    }
+
     return { executed, failed };
   }
 

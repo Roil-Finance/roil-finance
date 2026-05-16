@@ -467,9 +467,9 @@ portfolioRouter.put('/:id/trigger-mode', async (req, res) => {
       return res.status(400).json({ success: false, error: 'triggerMode required' });
     }
     // Query portfolio to get the user party (controller for this choice)
-    const contracts = await ledger.query(TEMPLATES.Portfolio, config.platformParty);
-    const contract = contracts.find((c: any) => c.contractId === id);
-    const userParty = contract?.payload?.user as string;
+    const contracts = await ledger.query<PortfolioPayload>(TEMPLATES.Portfolio, config.platformParty);
+    const contract = contracts.find((c) => c.contractId === id);
+    const userParty = contract?.payload.user;
     if (!userParty) {
       return res.status(404).json({ success: false, error: 'Portfolio not found' });
     }
@@ -493,9 +493,9 @@ portfolioRouter.post('/:id/deactivate', async (req, res) => {
   try {
     const { id } = req.params;
     // Query portfolio to get the user party (controller for this choice)
-    const contracts = await ledger.query(TEMPLATES.Portfolio, config.platformParty);
-    const contract = contracts.find((c: any) => c.contractId === id);
-    const userParty = contract?.payload?.user as string;
+    const contracts = await ledger.query<PortfolioPayload>(TEMPLATES.Portfolio, config.platformParty);
+    const contract = contracts.find((c) => c.contractId === id);
+    const userParty = contract?.payload.user;
     if (!userParty) {
       return res.status(404).json({ success: false, error: 'Portfolio not found' });
     }
@@ -519,9 +519,9 @@ portfolioRouter.post('/:id/activate', async (req, res) => {
   try {
     const { id } = req.params;
     // Query portfolio to get the user party (controller for this choice)
-    const contracts = await ledger.query(TEMPLATES.Portfolio, config.platformParty);
-    const contract = contracts.find((c: any) => c.contractId === id);
-    const userParty = contract?.payload?.user as string;
+    const contracts = await ledger.query<PortfolioPayload>(TEMPLATES.Portfolio, config.platformParty);
+    const contract = contracts.find((c) => c.contractId === id);
+    const userParty = contract?.payload.user;
     if (!userParty) {
       return res.status(404).json({ success: false, error: 'Portfolio not found' });
     }
@@ -627,9 +627,9 @@ portfolioRouter.post('/:id/estimate-cost', async (req: Request, res: Response) =
 portfolioRouter.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const contracts = await ledger.query(TEMPLATES.Portfolio, config.platformParty);
-    const contract = contracts.find((c: any) => c.contractId === id);
-    const userParty = contract?.payload?.user as string;
+    const contracts = await ledger.query<PortfolioPayload>(TEMPLATES.Portfolio, config.platformParty);
+    const contract = contracts.find((c) => c.contractId === id);
+    const userParty = contract?.payload.user;
     if (!userParty) return res.status(404).json({ success: false, error: 'Portfolio not found' });
     // Deactivate instead of delete (Daml doesn't support arbitrary archive)
     await ledger.exerciseAs(TEMPLATES.Portfolio, id!, 'DeactivatePortfolio', {}, userParty);

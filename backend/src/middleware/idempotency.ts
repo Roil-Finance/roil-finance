@@ -32,13 +32,25 @@ const inFlight = new Map<string, Promise<CachedResponse>>();
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
 const MAX_WAIT_MS = 60_000; // 60s maximum wait for concurrent in-flight request
 
-// Cleanup old entries every hour to prevent memory leaks
+// Cleanup old entries every hour to prevent memory leaks. We log when
+// anything was evicted so operators have a signal if the TTL needs
+// tuning (e.g. a stream of returning clients past 24h would show up as
+// repeated non-zero evictions correlating with auth-failure spikes).
 setInterval(() => {
   const now = Date.now();
+  let evicted = 0;
   for (const [key, value] of idempotencyCache.entries()) {
     if (now - value.timestamp > CACHE_TTL) {
       idempotencyCache.delete(key);
+      evicted++;
     }
+  }
+  if (evicted > 0) {
+    logger.debug('Idempotency cache eviction', {
+      component: 'idempotency',
+      evicted,
+      remaining: idempotencyCache.size,
+    });
   }
 }, 60 * 60 * 1000).unref();
 
