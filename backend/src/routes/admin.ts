@@ -11,8 +11,9 @@
 
 import { Router, type Request, type Response, type NextFunction } from 'express';
 import { z } from 'zod';
-import { config, INSTRUMENTS } from '../config.js';
+import { config, INSTRUMENTS, TEMPLATES } from '../config.js';
 import { requireAdmin } from '../middleware/admin-auth.js';
+import { ledger } from '../ledger.js';
 import { logger } from '../monitoring/logger.js';
 
 // ---------------------------------------------------------------------------
@@ -24,7 +25,7 @@ const ADMIN_RATE_WINDOW = 60_000; // 1 minute
 const adminRequestCounts = new Map<string, { count: number; resetAt: number }>();
 
 function adminRateLimiter(req: Request, res: Response, next: NextFunction): void {
-  const ip = req.socket.remoteAddress || 'unknown';
+  const ip = req.ip || req.socket.remoteAddress || 'unknown';
   const now = Date.now();
   const entry = adminRequestCounts.get(ip);
 
@@ -191,7 +192,7 @@ adminRouter.use(requireAdmin);
  *
  * Get current platform admin status.
  */
-adminRouter.get('/status', (req: Request, res: Response) => {
+adminRouter.get('/status', async (req: Request, res: Response) => {
   if (req.actAs !== undefined && !req.actAs?.includes(config.platformParty) && req.partyId !== config.platformParty) {
     return res.status(403).json({ error: 'Forbidden: admin access required' });
   }
@@ -203,6 +204,25 @@ adminRouter.get('/status', (req: Request, res: Response) => {
     details: {},
   });
 
+  // Count active Portfolio + DCASchedule contracts on the ledger. We never
+  // surface raw counts as a security signal — they only feed the admin
+  // dashboard gauge. If the ledger query fails we fall back to 0 rather
+  // than 500-ing the whole status endpoint.
+  let activePortfolios = 0;
+  let activeDCAs = 0;
+  try {
+    const [portfolios, schedules] = await Promise.all([
+      ledger.query<{ isActive: boolean }>(TEMPLATES.Portfolio, config.platformParty),
+      ledger.query<{ isActive: boolean }>(TEMPLATES.DCASchedule, config.platformParty),
+    ]);
+    activePortfolios = portfolios.filter((p) => p.payload?.isActive).length;
+    activeDCAs = schedules.filter((s) => s.payload?.isActive).length;
+  } catch (err) {
+    logger.warn('Admin status ledger count failed', {
+      error: err instanceof Error ? err.message : String(err),
+    });
+  }
+
   res.json({
     success: true,
     data: {
@@ -210,8 +230,8 @@ adminRouter.get('/status', (req: Request, res: Response) => {
       frozen: adminState.frozen,
       feeRate: adminState.feeRate,
       allowedAssets: adminState.allowedAssets,
-      activePortfolios: 0, // TODO: wire to actual count from ledger queries
-      activeDCAs: 0,       // TODO: wire to actual count from ledger queries
+      activePortfolios,
+      activeDCAs,
       startedAt: adminState.startedAt,
     },
   });

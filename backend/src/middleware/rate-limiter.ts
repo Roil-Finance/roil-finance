@@ -113,7 +113,10 @@ async function redisIncrement(key: string): Promise<{ count: number; resetAt: nu
 // ---------------------------------------------------------------------------
 
 export function rateLimiter(req: Request, res: Response, next: NextFunction): void {
-  const ip = req.socket.remoteAddress || 'unknown';
+  // `req.ip` honours `trust proxy` (configured in server.ts) so requests
+  // arriving through Caddy resolve to the original client IP rather than
+  // the proxy's loopback address.
+  const ip = req.ip || req.socket.remoteAddress || 'unknown';
 
   const handleResult = (result: { count: number; resetAt: number }) => {
     // Set rate limit headers

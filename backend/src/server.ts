@@ -47,6 +47,12 @@ const __dirname = dirname(__filename);
 export function createApp(): express.Express {
   const app = express();
 
+  // Trust the reverse proxy (Caddy/nginx on loopback) so `req.ip` and
+  // `X-Forwarded-For` resolve to the real client IP. Without this, rate
+  // limiting keys on the proxy's IP and becomes a single shared bucket.
+  // `loopback` = only trust X-Forwarded-For when proxied from 127.0.0.1.
+  app.set('trust proxy', 'loopback');
+
   // -----------------------------------------------------------------------
   // Middleware
   // -----------------------------------------------------------------------

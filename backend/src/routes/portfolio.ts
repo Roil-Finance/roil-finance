@@ -499,6 +499,13 @@ portfolioRouter.post('/:id/deactivate', async (req, res) => {
     if (!userParty) {
       return res.status(404).json({ success: false, error: 'Portfolio not found' });
     }
+    // Authorization: verify the authenticated party owns this portfolio
+    if (config.network !== 'localnet') {
+      const actAs = req.actAs || [];
+      if (!actAs.includes(userParty)) {
+        return res.status(403).json({ success: false, error: 'Not authorized for this portfolio' });
+      }
+    }
     await ledger.exerciseAs(TEMPLATES.Portfolio, id!, 'DeactivatePortfolio', {}, userParty);
     res.json({ success: true, data: { contractId: id, isActive: false } });
   } catch (err) {
@@ -517,6 +524,13 @@ portfolioRouter.post('/:id/activate', async (req, res) => {
     const userParty = contract?.payload?.user as string;
     if (!userParty) {
       return res.status(404).json({ success: false, error: 'Portfolio not found' });
+    }
+    // Authorization: verify the authenticated party owns this portfolio
+    if (config.network !== 'localnet') {
+      const actAs = req.actAs || [];
+      if (!actAs.includes(userParty)) {
+        return res.status(403).json({ success: false, error: 'Not authorized for this portfolio' });
+      }
     }
     await ledger.exerciseAs(TEMPLATES.Portfolio, id!, 'ActivatePortfolio', {}, userParty);
     res.json({ success: true, data: { contractId: id, isActive: true } });

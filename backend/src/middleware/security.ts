@@ -13,7 +13,10 @@ const RATE_LIMIT = parseInt(process.env.RATE_LIMIT_MAX || '100', 10);
 const RATE_WINDOW = 60_000; // 1 minute
 
 export function rateLimiter(req: Request, res: Response, next: NextFunction): void {
-  const ip = req.socket.remoteAddress || 'unknown'; // NOT req.ip (IP spoofing prevention)
+  // `req.ip` respects X-Forwarded-For only when `trust proxy` is set in
+  // server.ts (configured for loopback Caddy), so reverse-proxied requests
+  // are keyed on the real client IP, not the proxy's loopback address.
+  const ip = req.ip || req.socket.remoteAddress || 'unknown';
   const now = Date.now();
   const entry = requestCounts.get(ip);
 
