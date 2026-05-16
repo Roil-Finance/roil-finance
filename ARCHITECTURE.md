@@ -11,7 +11,7 @@ Backend (Express + TypeScript)
         |
         | REST API + SSE
         |
-Frontend (React 19 + Vite)         <- Separate repo: Himess/roil-app
+Frontend (React 19 + Vite)         <- Separate repo: Roil-Finance/roil-app
 ```
 
 Roil follows a three-tier architecture. The Canton participant node runs the Daml smart contracts and provides the ledger. The backend orchestrates all business logic and exposes a REST API. The frontend (maintained in a separate private repository) consumes that API.
@@ -123,7 +123,7 @@ Roil runs on three separate Netcup VPS nodes corresponding to the three Canton n
 - **Backend:** `roil-backend.service` (`User=roil`, hardened: `NoNewPrivileges`, `ProtectSystem=strict`, `PrivateTmp`) running compiled `dist/index.js` on `localhost:3001`
 - **DAR:** `roil-finance-0.3.1.dar` uploaded to the validator participant
 - **Edge:** Caddy 2.6.2 terminates TLS for `api.roil.app` (Let's Encrypt auto-renew) and reverse-proxies to `localhost:3001`. To keep port 80 free for Caddy, the Splice-provided nginx is bound to `127.0.0.1:80` via `HOST_BIND_IP`. Splice wallet/ANS UIs reachable via SSH tunnel only.
-- **Frontend:** `roil.app` served by Vercel from the `Himess/roil-app` repo (not this one); it calls `https://api.roil.app`.
+- **Frontend:** `roil.app` served by Vercel from the `Roil-Finance/roil-app` repo (not this one); it calls `https://api.roil.app`.
 
 ### MainNet (`roil-mainnet`) — awaiting 2026-04-20 provisioning
 - Bare Ubuntu 24.04, no Splice installed

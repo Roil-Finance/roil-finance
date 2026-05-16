@@ -43,7 +43,7 @@ services:
       start_period: 15s
 
   # NOTE: The frontend UI has been moved to a separate private repository
-  # (Himess/roil-app) and is deployed via Vercel. The ./ui directory in this
+  # (Roil-Finance/roil-app) and is deployed via Vercel. The ./ui directory in this
   # repo contains the original open-source dashboard but may not have a
   # Dockerfile. Uncomment the block below if you restore a local UI build.
   #

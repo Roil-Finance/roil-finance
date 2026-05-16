@@ -40,7 +40,7 @@ Roil Finance teknik olarak ciddi bir iş. Canton community içinde saygı kazana
 | Daml (main/) | 10 .daml | 1,786 |
 | Daml tests (test/) | 6 test | ~4,300 |
 | Backend tests | ~8-12 .test.ts | ~2,000 (tahmini) |
-| Frontend (Himess/roil-app) | 30+ component | - |
+| Frontend (Roil-Finance/roil-app) | 30+ component | - |
 | Frontend tests | 3 .test.{ts,tsx} + 10 e2e | ~210 |
 | CI | 1 workflow (ci.yml) | 78 |
 | DAR'lar | roil-finance-0.3.0.dar + 7 splice-* data-dep | - |
@@ -196,7 +196,7 @@ CIP-0056'nın atomik transfer garantisi sağlanmıyor. Backend Ledger API üzeri
 
 ---
 
-## 3. Frontend Audit (`Himess/roil-app`)
+## 3. Frontend Audit (`Roil-Finance/roil-app`)
 
 ### 3.1 Architecture & Shell
 

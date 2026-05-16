@@ -4,10 +4,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Himess/roil-finance/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://github.com/Roil-Finance/roil-finance/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://www.canton.network/"><img src="https://img.shields.io/badge/Canton-Network-6366F1" alt="Canton Network"></a>
   <a href="https://docs.daml.com/"><img src="https://img.shields.io/badge/Daml-3.4.11-00D4AA" alt="Daml 3.4.11"></a>
-  <a href="https://github.com/Himess/roil-finance"><img src="https://img.shields.io/badge/TypeScript-5.7-3178C6" alt="TypeScript"></a>
+  <a href="https://github.com/Roil-Finance/roil-finance"><img src="https://img.shields.io/badge/TypeScript-5.7-3178C6" alt="TypeScript"></a>
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61DAFB" alt="React 19"></a>
 </p>
 
@@ -19,7 +19,7 @@
   <a href="https://roil.app">App</a> &middot;
   <a href="https://roil.app/home">Landing Page</a> &middot;
   <a href="https://www.youtube.com/watch?v=_MagWXLwyiw">Demo Video</a> &middot;
-  <a href="https://github.com/Himess/roil-finance">GitHub</a>
+  <a href="https://github.com/Roil-Finance/roil-finance">GitHub</a>
 </p>
 
 ---
@@ -171,7 +171,7 @@ Roil includes a DEX aggregator that compares prices across multiple Canton Netwo
 ### Docker (Recommended)
 
 ```bash
-git clone https://github.com/Himess/roil-finance.git
+git clone https://github.com/Roil-Finance/roil-finance.git
 cd roil-finance
 
 # Set up environment (required for locale-sensitive systems)
@@ -195,7 +195,7 @@ Open [http://localhost:5173](http://localhost:5173) for the UI. Backend API runs
 ### Manual Setup
 
 ```bash
-git clone https://github.com/Himess/roil-finance.git
+git clone https://github.com/Roil-Finance/roil-finance.git
 cd roil-finance
 
 # 1. Build Daml contracts
@@ -499,7 +499,7 @@ Contributions are welcome. Please follow these guidelines:
 4. **Follow existing code style** -- TypeScript strict mode, ESLint rules, Daml best practices
 5. **Submit a pull request** with a clear description of what changed and why
 
-For bug reports and feature requests, please [open an issue](https://github.com/Himess/roil-finance/issues).
+For bug reports and feature requests, please [open an issue](https://github.com/Roil-Finance/roil-finance/issues).
 
 ---
 
@@ -507,7 +507,7 @@ For bug reports and feature requests, please [open an issue](https://github.com/
 
 This project is licensed under the [MIT License](./LICENSE).
 
-> **Note:** The frontend UI is maintained in a separate private repository ([Himess/roil-app](https://github.com/Himess/roil-app)) to protect the landing page and design assets. The `ui/` directory in this repo contains the original open-source React dashboard.
+> **Note:** The frontend UI is maintained in a separate private repository ([Roil-Finance/roil-app](https://github.com/Roil-Finance/roil-app)) to protect the landing page and design assets. The `ui/` directory in this repo contains the original open-source React dashboard.
 
 ---
 
@@ -519,7 +519,7 @@ This project is licensed under the [MIT License](./LICENSE).
   <a href="https://roil.app">App</a> &middot;
   <a href="https://roil.app/home">Landing Page</a> &middot;
   <a href="https://www.youtube.com/watch?v=_MagWXLwyiw">Demo Video</a> &middot;
-  <a href="https://github.com/Himess/roil-finance">GitHub</a> &middot;
+  <a href="https://github.com/Roil-Finance/roil-finance">GitHub</a> &middot;
   <a href="https://www.canton.network/">Canton Network</a> &middot;
   <a href="https://www.cantex.io/">Cantex</a> &middot;
   <a href="https://www.templedigitalgroup.com/">Temple Digital Group</a>

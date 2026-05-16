@@ -6,7 +6,7 @@
 **Applicant:** Himess (contact: semih@roil.app)
 **Live URL:** https://roil.app
 **Backend API:** https://api.roil.app
-**Repositories:** [github.com/Himess/roil-finance](https://github.com/Himess/roil-finance) (public, Daml + backend) · `Himess/roil-app` (private, frontend)
+**Repositories:** [github.com/Roil-Finance/roil-finance](https://github.com/Roil-Finance/roil-finance) (public, Daml + backend) · `Roil-Finance/roil-app` (private, frontend)
 
 ---
 

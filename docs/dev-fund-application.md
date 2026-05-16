@@ -57,8 +57,8 @@ Roil is currently a solo-maintainer project. We are hiring a second engineer con
 ## 7. Prior Proof of Work
 
 - **Repositories:**
-  - [github.com/Himess/roil-finance](https://github.com/Himess/roil-finance) (public, Daml + backend)
-  - `Himess/roil-app` (private, frontend)
+  - [github.com/Roil-Finance/roil-finance](https://github.com/Roil-Finance/roil-finance) (public, Daml + backend)
+  - `Roil-Finance/roil-app` (private, frontend)
 - **Live deployment:**
   - Frontend: [https://roil.app](https://roil.app)
   - API: [`https://api.roil.app/health`](https://api.roil.app/health) (live, Let's Encrypt TLS, Prometheus-scrapable)

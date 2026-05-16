@@ -81,7 +81,7 @@ This prevents cascading failures when external services are unavailable.
 2. **Oracle centralization** -- The backend is the sole price oracle for treasury swaps. A compromised backend could manipulate prices. Future versions should use multi-source oracle aggregation with on-chain verification.
 3. **JWT key management** -- Private keys for RS256/ES256 are stored on disk. In production, use a hardware security module (HSM) or cloud KMS.
 4. **Governance exists, but whitelist is permissioned** -- `Governance.daml` ships with platform-controlled freeze, pause, fee update, and audit-log flows. Whitelist entry addition/removal is still platform-only and has no on-chain vote yet; moving it under `Governance` is on the roadmap.
-5. **No audit of frontend** -- The production frontend (Himess/roil-app) is private and undergoes its own review process; the open-source `ui/` directory is a reference build only.
+5. **No audit of frontend** -- The production frontend (Roil-Finance/roil-app) is private and undergoes its own review process; the open-source `ui/` directory is a reference build only.
 
 ### Backend-trusted contract patterns (planned on-chain hardening)
 

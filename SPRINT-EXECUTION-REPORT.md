@@ -27,7 +27,7 @@
 | 13 | Backend: admin party allocation validate | ✅ | `backend/src/services/admin-party-validator.ts` (129 LOC) — distinguishes real / mock / missing parties, logs summary at startup |
 | 14 | Frontend: TestNet badge + demo banner persistent | ✅ | `roil-app/src/components/NetworkBadge.tsx` (header pill), `DemoBanner.tsx` (two-state refactor), `AppLayout.tsx` rewired |
 | 15 | Frontend: route guard + protected routes | ✅ | `roil-app/src/components/ProtectedRoute.tsx` — soft guard + `requireAuth` hard mode for `/wallet` and `/admin` |
-| 16 | Frontend: commit + Vercel deploy | ✅ | Commit `bd308d3` pushed to `Himess/roil-app:main`; Vercel deployment `ui-6os1uork4` ready in 29s; `roil.app` alias updated |
+| 16 | Frontend: commit + Vercel deploy | ✅ | Commit `bd308d3` pushed to `Roil-Finance/roil-app:main`; Vercel deployment `ui-6os1uork4` ready in 29s; `roil.app` alias updated |
 | 17 | FA application draft | ✅ | `docs/featured-app-application.md` — 12 sections, CIP compliance matrix, 6-month projection, demo outline, reviewer file refs |
 | 18 | Dev Fund grant draft | ✅ | `docs/dev-fund-application.md` — $10,750 budget, milestone schedule, risks, reporting commitments |
 

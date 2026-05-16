@@ -23,7 +23,7 @@
 - Prometheus metrics, structured logging, OpenTelemetry tracing
 
 ### Frontend (React 19 + Vite)
-- Private repo `Himess/roil-app`, deployed to Vercel at `roil.app`
+- Private repo `Roil-Finance/roil-app`, deployed to Vercel at `roil.app`
 - 6 authenticated pages + docs pages + landing page
 - Persistent TestNet `NetworkBadge` + two-state `DemoBanner`
 - Route guard (`ProtectedRoute` soft + `requireAuth` hard)
@@ -133,5 +133,5 @@
 
 - **Live app:** https://roil.app
 - **Backend:** https://api.roil.app
-- **Public repo:** https://github.com/Himess/roil-finance
-- **Frontend (private):** github.com/Himess/roil-app
+- **Public repo:** https://github.com/Roil-Finance/roil-finance
+- **Frontend (private):** github.com/Roil-Finance/roil-app

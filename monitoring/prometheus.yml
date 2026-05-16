@@ -7,7 +7,7 @@
 #       backend runs as `roil-backend.service` on localhost:3001.
 #       Point a sidecar Prometheus at the `localhost` target below.
 #
-# The frontend moved to Vercel (Himess/roil-app) so the former
+# The frontend moved to Vercel (Roil-Finance/roil-app) so the former
 # rebalancer-frontend nginx target was removed.
 
 global:

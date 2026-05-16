@@ -11,7 +11,7 @@
 ## [0.3.3] - 2026-04-17
 
 Wave-3 hardening pass — 42 items across backend, Daml, frontend (separate
-`Himess/roil-app` repo), ops/docs, and TestNet live state.
+`Roil-Finance/roil-app` repo), ops/docs, and TestNet live state.
 
 ### Added
 - **Daml:** `FeaturedApp.RecordActivity` now rejects empty/long `activityId` (≤128 chars) and out-of-range `activityWeight` (1–100) to cap per-call loop size. 5 new `TestFeaturedApp` scripts exercise the dedup + bounds paths (duplicate reject, max weight, long id reject, zero weight reject, max-weight accept). Test count: 152 → **157**.
@@ -55,7 +55,7 @@ Post-audit hardening pass. DAR v0.3.2 built and deployed to TestNet.
 - **CommandDedupCache** — backend-side dedup so application-level retries collapse into the same Canton `commandId`, layered on top of Canton's native 10-minute dedup window
 - **Canton JSON API response validation** — fail-soft Zod schemas on `/state/ledger-end`, `/state/active-contracts`, `/commands/submit-and-wait`, `/packages` catch upstream drift without causing regressions
 - **Prometheus alert rules** — backend down, circuit-open spikes, ledger 5xx rate, DCA lag, idempotency timeout rate
-- **Frontend CI** (in `Himess/roil-app`) — build, test, lint, e2e on every PR
+- **Frontend CI** (in `Roil-Finance/roil-app`) — build, test, lint, e2e on every PR
 - **Rollback runbook** — `docs/runbook.md` with deploy, rollback, DAR upload, common incident procedures
 
 ### Changed
